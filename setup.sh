@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 set -e
  
 CURRENT_USER="$(id -un)"
@@ -25,7 +25,7 @@ else
 fi
  
 echo "[*] Installing Neovim and tmux"
-brew install neovim tmux fzf
+brew install neovim tmux fzf wget
  
  
 if [[ -d "/Applications/Alacritty.app" ]]; then
@@ -35,9 +35,7 @@ else
   ALACRITTY_DMG="/tmp/Alacritty.dmg"
   ALACRITTY_MOUNT="/Volumes/Alacritty"
  
-  curl -fssl \
-    https://github.com/alacritty/alacritty/releases/latest/download/Alacritty.dmg \
-    -o "$ALACRITTY_DMG"
+  wget -O $ALACRITTY_DMG https://github.com/alacritty/alacritty/releases/download/v0.16.1/Alacritty-v0.16.1.dmg
  
   hdiutil attach "$ALACRITTY_DMG" -mountpoint "$ALACRITTY_MOUNT"
   cp -R "$ALACRITTY_MOUNT/Alacritty.app" /Applications/
