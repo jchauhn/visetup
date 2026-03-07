@@ -28,50 +28,9 @@ echo "[*] Installing Neovim and tmux"
 brew install neovim tmux fzf wget
  
  
-if [[ -d "/Applications/Alacritty.app" ]]; then
-  echo "Alacritty already installed — skipping"
-else
-  echo "[*] Installing Alacritty"
-  ALACRITTY_DMG="/tmp/Alacritty.dmg"
-  ALACRITTY_MOUNT="/Volumes/Alacritty"
- 
-  wget -O $ALACRITTY_DMG https://github.com/alacritty/alacritty/releases/download/v0.16.1/Alacritty-v0.16.1.dmg
- 
-  hdiutil attach "$ALACRITTY_DMG" -mountpoint "$ALACRITTY_MOUNT"
-  cp -R "$ALACRITTY_MOUNT/Alacritty.app" /Applications/
-  hdiutil detach "$ALACRITTY_MOUNT"
-  rm -f "$ALACRITTY_DMG"
-fi
- 
-echo "[*] Setting up Alacritty config as Gruvbox Dark"
-mkdir -p "${USER_HOME}/.config/alacritty"
- 
-cat <<'EOF' > "${USER_HOME}/.config/alacritty/alacritty.yml"
-# Colors (Gruvbox Dark)
-colors:
-  primary:
-    background: '#282828'
-    foreground: '#ebdbb2'
-  normal:
-    black:   '#282828'
-    red:     '#cc241d'
-    green:   '#98971a'
-    yellow:  '#d79921'
-    blue:    '#458588'
-    magenta: '#b16286'
-    cyan:    '#689d6a'
-    white:   '#a89984'
-  bright:
-    black:   '#928374'
-    red:     '#fb4934'
-    green:   '#b8bb26'
-    yellow:  '#fabd2f'
-    blue:    '#83a598'
-    magenta: '#d3869b'
-    cyan:    '#8ec07c'
-    white:   '#ebdbb2'
-EOF
- 
+echo "[*] Setting up Lazyvim"
+git clone https://github.com/jchauhn/lazyvim ~/.config/nvim
+
 echo "[*] Setting up tmux config"
  
 cat <<'EOF' > "${TMUX_CONF}"
@@ -80,6 +39,10 @@ unbind C-b
 set-option -g prefix C-s
 bind-key C-s send-prefix
 set -g mouse on
+
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-cancel "pbcopy"
+bind -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
+
  
  
 # set-option -g default-path "#{pane_current_path}"
