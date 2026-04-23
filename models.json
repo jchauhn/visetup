@@ -1,0 +1,79 @@
+{
+  "providers": {
+    "mlx_vlm": {
+      "baseUrl": "http://192.168.100.102:8085/v1",
+      "api": "openai-completions",
+      "apiKey": "dummy-key",
+      "compat":{
+        "supportsUsageInStreaming": false,
+        "maxTokensField": "max_tokens"
+      },
+      "models": [
+        { "id": "unsloth/gemma-4-26b-a4b-it-MLX-8bit",
+          "reasoning": true,
+          "input": ["text","image"],
+          "contextWindow": 128000,
+          "maxTokens": 32792
+        }
+      ]
+    },
+    "mlx_qwen1": {
+      "baseUrl": "http://192.168.100.102:8083/v1",
+      "api": "openai-completions",
+      "apiKey": "dummy-key",
+      "compat":{
+        "supportsUsageInStreaming": false,
+        "maxTokensField": "max_tokens"
+      },
+      "models": [
+        { "id": "unsloth/Qwen3.6-35B-A3B-UD-MLX-4bit",
+          "reasoning": true,
+          "thinkingFormat": "qwen",
+          "input": ["text","image"],
+          "contextWindow": 262144,
+          "maxTokens": 100000,
+          "stream": false
+        }
+      ]
+    },
+    "mlx_qwen2": {
+      "baseUrl": "http://192.168.100.102:8083/v1",
+      "api": "openai-completions",
+      "apiKey": "dummy-key",
+      "compat":{
+        "supportsUsageInStreaming": false,
+        "maxTokensField": "max_tokens"
+      },
+      "models": [
+        { "id": "unsloth/Qwen3.6-27B-UD-MLX-4bit",
+          "reasoning": false,
+          "thinkingFormat": "qwen",
+          "input": ["text","image"],
+          "contextWindow": 262144,
+          "maxTokens": 100000,
+          "stream": false
+        }
+      ]
+    },
+    "llama-server": {
+      "baseUrl": "http://192.168.100.102:8080/v1",
+      "api": "openai-completions",
+      "apiKey": "dummy-key",
+      "compat":{
+        "supportsUsageInStreaming": false,
+        "maxTokensField": "max_tokens"
+      },
+      "models": [
+        { "id": "unsloth/qwen36b",
+          "reasoning": true,
+          "input": ["text","image"],
+          "contextWindow": 262144,
+          "maxTokens": 100000
+        }
+      ]
+    }
+ 
+ 
+  }
+}
+ 
